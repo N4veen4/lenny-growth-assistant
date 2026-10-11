@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post("", response_model=ConversationResponse, status_code=status.HTTP_201_CREATED)
 def create_conversation(conversation_in: ConversationCreate, db: Session = Depends(get_db)):
-    db_obj = Conversation(title=conversation_in.title)
+    db_obj = Conversation(title=conversation_in.title, user_metadata=conversation_in.user_metadata or {})
     db.add(db_obj)
     db.commit()
     db.refresh(db_obj)
@@ -33,7 +33,10 @@ def rename_conversation(conversation_id: uuid.UUID, conversation_in: Conversatio
     conversation = db.query(Conversation).filter(Conversation.id == conversation_id).first()
     if not conversation:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Conversation not found")
-    conversation.title = conversation_in.title
+    if conversation_in.title is not None:
+        conversation.title = conversation_in.title
+    if conversation_in.user_metadata is not None:
+        conversation.user_metadata = conversation_in.user_metadata
     db.commit()
     db.refresh(conversation)
     return conversation

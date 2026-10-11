@@ -53,9 +53,9 @@ def test_live_ollama_rag_retrieval_and_citations():
     run_startup_ingestion()
     
     with TestClient(app) as client:
-        # Ask about Brian Chesky's playbook from genuine_transcripts.json
+        # Ask about Mark Pincus from synced Lenny transcripts archive
         res = client.post("/api/v1/chat", json={
-            "message": "What did Brian Chesky say about product management and leadership at Airbnb?",
+            "message": "What did Mark Pincus say about the hidden pattern behind successful products?",
             "provider": "local",
             "model": "llama3:latest"
         })
@@ -64,9 +64,10 @@ def test_live_ollama_rag_retrieval_and_citations():
         assert data["provider"] == "local (ollama)"
         # Check that citations were returned from the knowledge base
         assert len(data["citations"]) > 0
-        citation = data["citations"][0]
-        assert citation["episode_title"] is not None
-        assert "chesky" in citation["episode_title"].lower() or "chesky" in (citation["speaker"] or "").lower()
+        assert any("pincus" in ((c.get("episode_title") or "") + (c.get("speaker") or "")).lower() for c in data["citations"])
+        for cit in data["citations"]:
+            assert cit["episode_title"] is not None
+            assert cit["url"] is not None
         # Verify assistant response is grounded in the retrieved material
         assert len(data["response_text"]) > 50
 

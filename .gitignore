@@ -60,7 +60,7 @@ build/
 *.sqlite
 *.sqlite3
 *.db
-agent_logs/
+# agent_logs/ is kept tracked for assignment deliverable 6
 *.pkl
 *.pickle
 vector_store_cache.pkl
@@ -69,6 +69,7 @@ vector_store_cache.pkl
 scratch/
 scratch_*/
 .scratch*
+backend/data/raw_transcripts_repo/
 *.tmp
 
 # Modern Frontend Build & Deploy Artifacts

@@ -92,9 +92,9 @@ def chat_endpoint(req: ChatRequest, db: Session = Depends(get_db)):
             logger.info("RAG_DIAG: Broad podcast summary query detected - retrieved %d representative chunks", len(results))
         else:
             raw_results = retrieval_service.search(SearchQuery(query=req.message, top_k=3))
-            # Relevance filtering: only retain chunks with cosine similarity >= 0.18
-            results = [r for r in raw_results if r.score >= 0.18]
-            logger.info("RAG_DIAG: query='%s' raw_results=%d filtered_results=%d (threshold=0.18)",
+            # Relevance filtering: only retain chunks with cosine similarity >= 0.22
+            results = [r for r in raw_results if r.score >= 0.22]
+            logger.info("RAG_DIAG: query='%s' raw_results=%d filtered_results=%d (threshold=0.22)",
                         req.message[:80], len(raw_results), len(results))
 
         for i, r in enumerate(results):
