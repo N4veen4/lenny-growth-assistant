@@ -22,14 +22,19 @@ function Welcome() {
   const icons = [Target, ChartNoAxesCombined, Sprout, Layers3];
   const topics = ["Product-market fit", "Retention", "Onboarding", "Pricing"];
   return (
-    <div className="mx-auto flex w-full max-w-[680px] flex-col px-5 pt-12 pb-8 sm:px-8 sm:pt-20">
-      <LogoMark className="size-12" />
-      <p className="mt-7 text-sm text-muted-foreground">{greeting}</p>
-      <h2 className="mt-2 max-w-lg font-display text-[30px] leading-tight font-medium sm:text-4xl">
-        What growth challenge are we working on?
+    <div className="mx-auto flex w-full max-w-[700px] flex-col px-5 pt-10 pb-8 sm:px-8 sm:pt-16">
+      <div className="flex items-center gap-3">
+        <LogoMark className="size-14 shadow-lg shadow-primary/15 transition-transform duration-300 hover:scale-105" />
+        <span className="rounded-full border border-primary/25 bg-brand-subtle px-3 py-1 text-xs font-semibold text-primary">
+          🎙️ 305 Lenny Podcast Episodes Indexed
+        </span>
+      </div>
+      <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{greeting}, builder</p>
+      <h2 className="mt-1.5 max-w-xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-foreground">
+        What growth challenge are we tackling today?
       </h2>
-      <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-        A little clarity for your next big decision.
+      <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
+        Synthesized wisdom from 50+ world-class founders and product leaders — grounded with direct citations.
       </p>
       <div className="mt-8 grid w-full gap-3 sm:grid-cols-2">
         {STARTER_QUESTIONS.slice(0, 4).map((q, i) => {
@@ -39,14 +44,16 @@ function Welcome() {
               key={q}
               variant="outline"
               onClick={() => send(q)}
-              className="group h-auto min-h-28 flex-col items-start gap-3 whitespace-normal rounded-xl border-border/70 bg-card/60 p-4 text-left shadow-xs transition-all duration-200 hover:border-primary/45 hover:bg-card hover:shadow-sm"
+              className="group h-auto min-h-28 flex-col items-start gap-2.5 whitespace-normal rounded-2xl border-border/70 bg-card/70 p-4 text-left shadow-xs transition-all duration-200 hover:border-primary/50 hover:bg-card hover:shadow-md hover:-translate-y-0.5"
             >
-              <span className="flex w-full items-center gap-2 text-xs text-muted-foreground">
-                <Icon className="size-4 text-primary/80 transition-colors group-hover:text-primary" />
+              <span className="flex w-full items-center gap-2 text-xs font-medium text-muted-foreground">
+                <span className="flex size-6 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="size-3.5" />
+                </span>
                 {topics[i]}
-                <ArrowUpRight className="ml-auto size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                <ArrowUpRight className="ml-auto size-3.5 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-primary" />
               </span>
-              <span className="text-sm font-normal leading-relaxed">{q}</span>
+              <span className="text-sm font-normal leading-relaxed text-foreground/90">{q}</span>
             </Button>
           );
         })}

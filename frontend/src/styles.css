@@ -2,7 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
 
 /*
  * Design system definition.
@@ -67,10 +67,49 @@
 @theme {
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
-  --font-display: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", "Plus Jakarta Sans", "Geist", sans-serif;
+  --font-brand: "Outfit", "Plus Jakarta Sans", sans-serif;
 }
 
-:root,
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.003 260);
+  --foreground: oklch(0.18 0.015 260);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.62 0.18 42);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.945 0.008 260);
+  --secondary-foreground: oklch(0.2 0.015 260);
+  --muted: oklch(0.945 0.006 260);
+  --muted-foreground: oklch(0.48 0.016 260);
+  --accent: oklch(0.935 0.012 260);
+  --accent-foreground: oklch(0.18 0.015 260);
+  --destructive: oklch(0.60 0.20 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.885 0.008 260);
+  --input: var(--border);
+  --ring: var(--primary);
+  --sidebar: oklch(0.965 0.005 260);
+  --sidebar-foreground: oklch(0.28 0.015 260);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: oklch(0.915 0.01 260);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: oklch(0.895 0.008 260);
+  --sidebar-ring: var(--ring);
+  --brand-subtle: oklch(0.94 0.04 43);
+  --user-surface: oklch(0.925 0.01 260);
+  --shadow-workspace: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --chart-1: var(--primary);
+  --chart-2: oklch(0.60 0.12 175);
+  --chart-3: oklch(0.55 0.14 250);
+  --chart-4: oklch(0.65 0.15 85);
+  --chart-5: oklch(0.58 0.16 340);
+}
+
 .dark {
   --radius: 0.5rem;
   --background: oklch(0.158 0.008 260);
