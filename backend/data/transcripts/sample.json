@@ -1,0 +1,18 @@
+[
+  {
+    "id": "sample_ep1",
+    "episode_title": "Brian Chesky on Airbnb Growth",
+    "url": "https://www.lennyspodcast.com/brian-cheskys-new-playbook/#transcript",
+    "speaker": "Brian Chesky",
+    "timestamp": "12:34",
+    "content": "When we were scaling Airbnb, the most important thing we did was to do things that don't scale. We went to New York and personally photographed every listing. That taught us what our users really needed. It wasn't about growth hacking, it was about creating a 10-star experience for our first 100 users."
+  },
+  {
+    "id": "sample_ep2",
+    "episode_title": "Elena Verna on PLG",
+    "url": "https://www.lennysnewsletter.com/p/elena-verna-on-why-every-company",
+    "speaker": "Elena Verna",
+    "timestamp": "45:10",
+    "content": "Product-led growth (PLG) isn't just a freemium model. It's about aligning the entire company around the product as the primary engine for acquisition, retention, and expansion. You have to build virality and network effects directly into the core loop of the product."
+  }
+]

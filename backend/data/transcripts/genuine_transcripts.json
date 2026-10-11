@@ -1,0 +1,26 @@
+[
+  {
+    "id": "lenny_ep_brian_chesky_playbook",
+    "episode_title": "Brian Chesky’s new playbook for product, leadership, and growth",
+    "url": "https://www.lennyspodcast.com/brian-cheskys-new-playbook/#transcript",
+    "speaker": "Brian Chesky",
+    "timestamp": "00:05:56",
+    "content": "We don't have any longer the traditional product management function as it existed. What we did is we combined what one might call the inbound product development responsibilities of product manager with the outbound or marketing responsibilities of product marketing. The second thing we did is we offboarded much of the program management functions that product managers may do to actual program managers. A lot of people with the product management title are actually program managers. The last thing we did is we made the group smaller and more senior. You can't build a product unless you know how to talk about the product. You can't be an expert in making the product unless you're also an expert in the market of it. If you build a great product and no one knows about it, did you even build a product? We have a much smaller function, the people are much more senior, and they do not control or drive designing or engineering. We are a fairly purely functional model where leaders manage by influence. Leaders need to be in the details. Being in the details is what every responsible board does with the CEO. If you don't know the details, how do you know people are doing a good job?"
+  },
+  {
+    "id": "lenny_ep_elena_verna_growth_tactics",
+    "episode_title": "10 growth tactics that never work | Elena Verna",
+    "url": "https://www.lennysnewsletter.com/p/10-growth-tactics-that-never-work",
+    "speaker": "Elena Verna",
+    "timestamp": "00:00:26",
+    "content": "There is a huge misconception in tech that in order to get growth going, you need a growth team. To figure out your product-market fit and how to distribute it, that is not something that you can outsource to a growth team. Number two: never ever once have I seen a rebrand or redesign, especially of a marketing site, produce good performance results. A new CMO comes in redesigning the website as a reflection of their personal taste promising acquisition will go up, and it never materializes into anything meaningful. Number three: if every single one of your initiatives on growth is an experiment, that's a problem. It's almost like a paralyzing disease. Growth is about compounding loops and product-market fit, not treating every obvious product improvement as a tiny A/B test."
+  },
+  {
+    "id": "lenny_nl_roadmap_prioritization",
+    "episode_title": "How to prioritize your roadmap | Lenny's Newsletter",
+    "url": "https://www.lennysnewsletter.com/p/how-to-prioritize-your-roadmap",
+    "speaker": "Lenny Rachitsky",
+    "timestamp": "00:00:00",
+    "content": "When prioritizing your product roadmap, the biggest mistake teams make is treating all features equally and relying purely on complicated scoring formulas. In practice, the best product leaders use a simple three-bucket strategy: core product improvements that deepen your competitive moat, new bets and expansion features that open new market opportunities, and hygiene or tech debt work that keeps the engine running reliably. Prioritization is not a math problem, it is a strategic decision about where your company needs to make progress this quarter."
+  }
+]
