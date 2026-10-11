@@ -59,15 +59,17 @@ export function ConversationItem({
   return (
     <div
       className={cn(
-        "group grid grid-cols-[minmax(0,1fr)_auto] items-center rounded-md transition-colors",
-        active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent/60",
+        "group grid grid-cols-[minmax(0,1fr)_auto] items-center rounded-lg transition-colors px-1",
+        active
+          ? "bg-sidebar-accent text-white font-medium shadow-xs"
+          : "text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground",
       )}
     >
       <Button
         variant="ghost"
         onClick={onSelect}
         aria-current={active ? "page" : undefined}
-        className="block h-10 min-w-0 flex-1 truncate rounded-md px-2.5 py-2.5 text-left text-[13px] font-normal hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="block h-9 min-w-0 flex-1 truncate rounded-lg px-2 text-left text-[13.5px] font-normal hover:bg-transparent focus-visible:outline-none"
       >
         {active && (
           <span className="mr-2 inline-block size-1.5 rounded-full bg-primary align-middle" />

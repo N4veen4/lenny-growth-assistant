@@ -11,7 +11,7 @@ export function ChatMessage({ message }: { message: Message }) {
   if (message.role === "user") {
     return (
       <div className="flex justify-end animate-in fade-in-50 duration-200">
-        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm border border-border/70 bg-user-surface px-4 py-3 text-sm leading-relaxed text-foreground shadow-sm">
+        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-3xl rounded-br-md border border-border/50 bg-user-surface px-5 py-3 text-[15px] leading-relaxed text-foreground shadow-xs">
           {message.content}
         </div>
       </div>
@@ -20,9 +20,9 @@ export function ChatMessage({ message }: { message: Message }) {
   const done = message.status === "done" || message.status === undefined;
   const artifact = message.artifact;
   return (
-    <div className="flex gap-3.5 animate-in fade-in-50 duration-200">
+    <div className="flex gap-4 animate-in fade-in-50 duration-200">
       <LogoMark className="mt-0.5 size-7 shrink-0" />
-      <div className="min-w-0 flex-1 text-sm">
+      <div className="min-w-0 flex-1 text-[15px] leading-relaxed">
         {!done && message.statusMsg && (
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary shadow-xs">
             <Loader2 className="size-3.5 animate-spin text-primary" />

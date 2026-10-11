@@ -89,13 +89,11 @@ export function AssistantProvider({ children }: { children: ReactNode }) {
         const list = await api.listConversations();
         if (mounted) {
           setConversations(list);
-          if (list.length > 0) {
-            setActiveId(list[0].id);
-          } else {
-            const newConv = await api.createConversation();
-            setConversations([newConv]);
-            setActiveId(newConv.id);
-          }
+          // When opening the web page newly, open directly on a clean new chat page:
+          setActiveId(null);
+          setArtifact(null);
+          setArtifacts([]);
+          setArtifactOpen(false);
         }
       } catch (err) {
         if (mounted) {
@@ -360,19 +358,13 @@ export function AssistantProvider({ children }: { children: ReactNode }) {
     [conversations, model, patch],
   );
 
-  const newChat = useCallback(async () => {
+  const newChat = useCallback(() => {
     stop();
-    try {
-      const c = await api.createConversation();
-      setConversations((l) => [c, ...l]);
-      setActiveId(c.id);
-      setError(null);
-      setArtifact(null);
-      setArtifacts([]);
-      setArtifactOpen(false);
-    } catch (err) {
-      toast.error("Failed to create conversation");
-    }
+    setActiveId(null);
+    setError(null);
+    setArtifact(null);
+    setArtifacts([]);
+    setArtifactOpen(false);
   }, [stop]);
 
   const send = useCallback(
@@ -426,17 +418,33 @@ export function AssistantProvider({ children }: { children: ReactNode }) {
         try {
           await api.deleteConversation(id);
           setConversations((list) => {
+            const currentIndex = list.findIndex((c) => c.id === id);
             const nextList = list.filter((c) => c.id !== id);
             if (activeId === id) {
-              // Wait for React to settle before creating a new chat if needed
               if (nextList.length === 0) {
-                setTimeout(() => newChat(), 0);
+                setActiveId(null);
+                setArtifact(null);
+                setArtifacts([]);
+                setArtifactOpen(false);
               } else {
-                setActiveId(nextList[0].id);
+                // Determine target conversation:
+                // If there is an adjacent item at currentIndex (now the next item), switch to it.
+                // If the deleted item was the last item, switch to the previous item (currentIndex - 1).
+                const targetIndex = currentIndex < nextList.length ? currentIndex : nextList.length - 1;
+                const nextTarget = nextList[Math.max(0, targetIndex)];
+                if (nextTarget) {
+                  setActiveId(nextTarget.id);
+                } else {
+                  setActiveId(null);
+                }
+                setArtifact(null);
+                setArtifacts([]);
+                setArtifactOpen(false);
               }
             }
             return nextList;
           });
+          toast.success("Conversation deleted");
         } catch (e) {
           toast.error("Failed to delete chat");
         }

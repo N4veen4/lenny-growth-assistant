@@ -44,7 +44,7 @@ function Welcome() {
               key={q}
               variant="outline"
               onClick={() => send(q)}
-              className="group h-auto min-h-28 flex-col items-start gap-2.5 whitespace-normal rounded-2xl border-border/70 bg-card/70 p-4 text-left shadow-xs transition-all duration-200 hover:border-primary/50 hover:bg-card hover:shadow-md hover:-translate-y-0.5"
+              className="group h-auto min-h-28 flex-col items-start gap-2.5 whitespace-normal rounded-2xl border-border/70 bg-card p-4 text-left shadow-xs transition-all duration-200 hover:border-[#383838] hover:bg-[#262626] hover:-translate-y-0.5"
             >
               <span className="flex w-full items-center gap-2 text-xs font-medium text-muted-foreground">
                 <span className="flex size-6 items-center justify-center rounded-lg bg-primary/10 text-primary">

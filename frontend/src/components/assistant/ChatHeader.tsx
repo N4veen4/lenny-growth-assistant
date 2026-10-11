@@ -13,7 +13,7 @@ export function ChatHeader({
 }) {
   const { active, artifact, artifactOpen, setArtifactOpen } = useAssistantStore();
   return (
-    <header className="grid h-[72px] shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-border/60 bg-background/50 backdrop-blur-xs px-3 sm:px-5">
+    <header className="grid h-[64px] shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-border/60 bg-background px-3 sm:px-5">
       <div className="flex min-w-0 items-center gap-2 sm:gap-3">
         <Button
           variant="ghost"
