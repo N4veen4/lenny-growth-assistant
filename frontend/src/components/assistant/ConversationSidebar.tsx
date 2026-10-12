@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 import { ConversationItem } from "./ConversationItem";
 import { LogoMark } from "./Logo";
 import { EmptyState } from "./States";
-import { ThemeSegmentedControl, ThemeToggle } from "./ThemeToggle";
+import { ThemeSettingsPopover, ThemeToggle } from "./ThemeToggle";
 import { useAssistantStore } from "./store";
 
 export function ConversationSidebar({
@@ -81,7 +81,7 @@ export function ConversationSidebar({
           </Button>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <ThemeToggle />
+          <ThemeSettingsPopover />
         </div>
       </aside>
     );
@@ -123,9 +123,6 @@ export function ConversationSidebar({
             <MessageSquarePlus className="size-4 text-primary transition-transform duration-200 group-hover:scale-110" />
             <span className="font-medium text-sm">New chat</span>
           </div>
-          <span className="rounded border border-border/60 bg-muted/60 px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground">
-            ⌘K
-          </span>
         </Button>
 
         <div className="relative">
@@ -152,7 +149,7 @@ export function ConversationSidebar({
       {/* 3. Quick Growth Assistant Templates (ChatGPT-style shortcuts) */}
       <div className="px-3 pt-3 pb-1">
         <div className="flex items-center gap-1.5 px-1 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/80">
-          <Sparkles className="size-3 text-primary" />
+
           <span>Quick Prompts</span>
         </div>
         <div className="grid grid-cols-2 gap-1.5">
@@ -221,16 +218,8 @@ export function ConversationSidebar({
         ))}
       </nav>
 
-      {/* 5. ChatGPT-Style Bottom Options Panel */}
+      {/* 5. Bottom Options Panel */}
       <div className="border-t border-sidebar-border bg-card/20 px-3 py-3 space-y-2.5">
-        {/* Theme Segmented Switcher */}
-        <div>
-          <p className="px-1 pb-1.5 text-[10px] font-medium text-muted-foreground/80">
-            Appearance
-          </p>
-          <ThemeSegmentedControl />
-        </div>
-
         {/* Knowledge Base Status Chip */}
         <div className="flex items-center justify-between rounded-lg border border-border/50 bg-background/40 px-2.5 py-1.5 text-[11px] text-muted-foreground">
           <div className="flex items-center gap-2">
@@ -243,7 +232,7 @@ export function ConversationSidebar({
           <span className="text-[10px] text-muted-foreground font-mono">609 Chunks</span>
         </div>
 
-        {/* Workspace Account / Clear Chats Row */}
+        {/* Workspace Account / Settings Gear Popover / Clear Chats Row */}
         <div className="flex items-center justify-between pt-0.5 text-[11px]">
           <div className="flex items-center gap-2 min-w-0">
             <div className="size-6 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-[10px] shrink-0 border border-primary/30">
@@ -252,15 +241,18 @@ export function ConversationSidebar({
             <span className="truncate font-medium text-foreground/90">Lenny Workspace</span>
           </div>
 
-          {conversations.length > 0 && (
-            <button
-              onClick={() => setPendingClearAll(true)}
-              className="text-[10px] text-muted-foreground hover:text-destructive transition-colors p-1 rounded hover:bg-destructive/10"
-              title="Clear all conversations"
-            >
-              <Trash2 className="size-3.5" />
-            </button>
-          )}
+          <div className="flex items-center gap-1 shrink-0">
+            <ThemeSettingsPopover />
+            {conversations.length > 0 && (
+              <button
+                onClick={() => setPendingClearAll(true)}
+                className="flex size-7 items-center justify-center rounded-md text-muted-foreground hover:text-destructive transition-colors hover:bg-destructive/10"
+                title="Clear all conversations"
+              >
+                <Trash2 className="size-3.5" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

@@ -11,6 +11,7 @@ import { LogoMark } from "./Logo";
 import { MessageComposer } from "./MessageComposer";
 import { ErrorState, LoadingState } from "./States";
 import { useAssistantStore } from "./store";
+import { cn } from "@/lib/utils";
 
 function Welcome() {
   const { send } = useAssistantStore();
@@ -22,7 +23,7 @@ function Welcome() {
   const icons = [Target, ChartNoAxesCombined, Sprout, Layers3];
   const topics = ["Product-market fit", "Retention", "Onboarding", "Pricing"];
   return (
-    <div className="mx-auto flex w-full max-w-[700px] flex-col px-5 pt-10 pb-8 sm:px-8 sm:pt-16">
+    <div className="mx-auto flex w-full max-w-[840px] flex-col px-5 pt-10 pb-8 sm:px-8 sm:pt-16">
       <div className="flex items-center gap-3">
         <LogoMark className="size-14 shadow-lg shadow-primary/15 transition-transform duration-300 hover:scale-105" />
         <span className="rounded-full border border-primary/25 bg-brand-subtle px-3 py-1 text-xs font-semibold text-primary">
@@ -62,7 +63,7 @@ function Welcome() {
   );
 }
 
-function ChatWorkspace() {
+function ChatWorkspace({ onScroll }: { onScroll?: (e: React.UIEvent<HTMLDivElement>) => void }) {
   const { active, phase, error, retry, hydrated } = useAssistantStore();
   const end = useRef<HTMLDivElement>(null);
   const msgs = active?.messages ?? [];
@@ -78,11 +79,16 @@ function ChatWorkspace() {
     );
 
   return (
-    <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain scroll-smooth">
+    <div
+      onScroll={onScroll}
+      className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+    >
       {msgs.length === 0 ? (
-        <Welcome />
+        <div className="pt-16">
+          <Welcome />
+        </div>
       ) : (
-        <div className="mx-auto max-w-3xl space-y-8 px-5 py-8 sm:px-8">
+        <div className="mx-auto max-w-[840px] space-y-8 px-5 pt-20 pb-8 sm:px-8">
           {msgs.map((m) => (
             <ChatMessage key={m.id} message={m} />
           ))}
@@ -100,7 +106,7 @@ function ChatWorkspace() {
 }
 
 export function AppLayout() {
-  const { artifactOpen, setArtifactOpen, newChat } = useAssistantStore();
+  const { active, artifactOpen, setArtifactOpen, newChat } = useAssistantStore();
   const [narrow, setNarrow] = useState(false);
   useEffect(() => {
     const media = window.matchMedia("(max-width: 1099px)");
@@ -111,6 +117,26 @@ export function AppLayout() {
   }, []);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    setHeaderVisible(true);
+  }, [active?.id]);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const current = e.currentTarget.scrollTop;
+    const diff = current - lastScrollY.current;
+
+    if (Math.abs(diff) > 8) {
+      if (current > 60 && diff > 0) {
+        setHeaderVisible(false);
+      } else if (diff < 0) {
+        setHeaderVisible(true);
+      }
+      lastScrollY.current = current;
+    }
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -134,12 +160,22 @@ export function AppLayout() {
           <ConversationSidebar collapsed={false} onNavigate={() => setMobileOpen(false)} />
         </SheetContent>
       </Sheet>
-      <main className="flex min-w-0 flex-1 flex-col">
-        <ChatHeader
-          onToggleSidebar={() => setCollapsed((c) => !c)}
-          onOpenMobileSidebar={() => setMobileOpen(true)}
-        />
-        <ChatWorkspace />
+      <main className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
+        {/* Floating GPU-accelerated auto-hiding header */}
+        <div
+          className={cn(
+            "absolute top-0 left-0 right-0 z-20 h-[64px] bg-background/95 backdrop-blur-md transition-all duration-300 ease-out",
+            headerVisible
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0 pointer-events-none",
+          )}
+        >
+          <ChatHeader
+            onToggleSidebar={() => setCollapsed((c) => !c)}
+            onOpenMobileSidebar={() => setMobileOpen(true)}
+          />
+        </div>
+        <ChatWorkspace onScroll={handleScroll} />
         <MessageComposer />
       </main>
       {artifactOpen && !narrow && (

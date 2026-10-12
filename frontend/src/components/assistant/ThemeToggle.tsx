@@ -1,7 +1,9 @@
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun, Monitor, Settings, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useState } from "react";
 
 export function ThemeToggle({
   className,
@@ -37,6 +39,84 @@ export function ThemeToggle({
         </>
       )}
     </Button>
+  );
+}
+
+export function ThemeSettingsPopover({ className }: { className?: string }) {
+  const { theme, setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          className={cn(
+            "flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none",
+            className,
+          )}
+          title="Theme settings"
+          aria-label="Theme settings"
+        >
+          <Settings className="size-4" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent align="end" side="top" className="w-44 p-1.5 shadow-xl border border-border/80">
+        <p className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+          Appearance
+        </p>
+        <div className="space-y-0.5">
+          <button
+            type="button"
+            onClick={() => {
+              setTheme("light");
+              setOpen(false);
+            }}
+            className={cn(
+              "flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs transition-colors hover:bg-accent hover:text-foreground",
+              theme === "light" && "bg-accent font-medium text-foreground",
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <Sun className="size-3.5 text-amber-500" /> Light
+            </span>
+            {theme === "light" && <Check className="size-3.5 text-primary" />}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setTheme("dark");
+              setOpen(false);
+            }}
+            className={cn(
+              "flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs transition-colors hover:bg-accent hover:text-foreground",
+              theme === "dark" && "bg-accent font-medium text-foreground",
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <Moon className="size-3.5 text-indigo-400" /> Dark
+            </span>
+            {theme === "dark" && <Check className="size-3.5 text-primary" />}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setTheme("system");
+              setOpen(false);
+            }}
+            className={cn(
+              "flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs transition-colors hover:bg-accent hover:text-foreground",
+              theme === "system" && "bg-accent font-medium text-foreground",
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <Monitor className="size-3.5 text-muted-foreground" /> System
+            </span>
+            {theme === "system" && <Check className="size-3.5 text-primary" />}
+          </button>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
 

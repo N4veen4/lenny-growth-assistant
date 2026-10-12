@@ -11,10 +11,10 @@ export function ChatHeader({
   onToggleSidebar: () => void;
   onOpenMobileSidebar: () => void;
 }) {
-  const { active, artifact, artifactOpen, setArtifactOpen } = useAssistantStore();
+  const { artifact, artifactOpen, setArtifactOpen } = useAssistantStore();
   return (
-    <header className="grid h-[64px] shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-border/60 bg-background px-3 sm:px-5">
-      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+    <header className="flex h-[64px] shrink-0 items-center justify-between border-b border-border/60 bg-background px-3 sm:px-5">
+      <div className="flex items-center gap-2 sm:gap-3">
         <Button
           variant="ghost"
           size="icon"
@@ -35,15 +35,6 @@ export function ChatHeader({
         >
           <PanelLeft />
         </Button>
-        <div className="min-w-0">
-          <h1 className="truncate text-sm font-semibold tracking-tight text-foreground font-display">
-            {active?.title ?? "New chat"}
-          </h1>
-          <p className="mt-0.5 truncate text-[11px] text-muted-foreground font-medium flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-emerald-500 inline-block" />
-            <span>The Lenny · Growth Assistant</span>
-          </p>
-        </div>
       </div>
       <div className="flex shrink-0 items-center gap-2">
         <ThemeToggle />

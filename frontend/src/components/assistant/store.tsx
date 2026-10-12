@@ -71,7 +71,7 @@ export function AssistantProvider({ children }: { children: ReactNode }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [model, setModelState] = useState<ModelSelection>({
     provider: "ollama",
-    model: "qwen3:4b",
+    model: "llama3:latest",
     cloudProviderName: "OpenRouter",
   });
   const [phase, setPhase] = useState<Phase>("idle");

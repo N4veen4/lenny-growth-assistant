@@ -38,24 +38,6 @@ export function ModelSelector() {
           <Button
             variant="ghost"
             onClick={() => {
-              setModel({ provider: "ollama", model: "qwen3:4b", cloudProviderName: "" });
-              setOpen(false);
-            }}
-            className={cn(
-              "flex w-full items-center justify-between h-9 rounded-md px-2 py-1.5 text-xs hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-              model.provider === "ollama" && model.model === "qwen3:4b" && "bg-accent",
-            )}
-          >
-            <span className="flex items-center gap-2">
-              <Cpu className="size-3.5" /> Local (Qwen3)
-            </span>
-            {model.provider === "ollama" && model.model === "qwen3:4b" && (
-              <Check className="size-3.5 text-primary" />
-            )}
-          </Button>
-          <Button
-            variant="ghost"
-            onClick={() => {
               setModel({ provider: "ollama", model: "llama3:latest", cloudProviderName: "" });
               setOpen(false);
             }}

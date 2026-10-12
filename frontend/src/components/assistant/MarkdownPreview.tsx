@@ -26,7 +26,7 @@ function CodeBlock({ children, className, ...props }: any) {
   };
 
   return (
-    <div className="relative my-3 group rounded-2xl border border-[#333333]/70 bg-[#212121] p-4 text-[#ECECEC] font-mono text-[13.5px] leading-relaxed shadow-sm">
+    <div className="relative my-3 group rounded-2xl border border-[#333333]/70 bg-[#212121] p-4 text-[#ECECEC] font-mono text-[14px] leading-relaxed shadow-sm">
       <button
         onClick={handleCopy}
         aria-label="Copy code"
